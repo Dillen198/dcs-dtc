@@ -120,6 +120,21 @@ public partial class AircraftPage : Page
         aircraft.PersistPreset(preset);
     }
 
+    /// <summary>The main content panel — exposed for WPF WindowsFormsHost embedding.</summary>
+    public Panel PnlMain => pnlMain;
+
+    /// <summary>Returns system pages for this aircraft/preset (used by WPF shell to build sidebar tabs).</summary>
+    public AircraftSystemPage[] GetSystemPagesArray()
+    {
+        return GetPages(preset.Configuration);
+    }
+
+    /// <summary>Shows a specific system page in the content panel (used by WPF shell tab selection).</summary>
+    public void ShowSystemPage(AircraftSystemPage page)
+    {
+        SetPage(page);
+    }
+
     public AircraftSystemPage GetPageOfType<T>()
     {
         foreach (AircraftSystemPage ctl in pnlMain.Controls)

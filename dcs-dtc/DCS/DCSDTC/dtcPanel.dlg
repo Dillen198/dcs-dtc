@@ -1,0 +1,274 @@
+dialog = {
+    ["type"] = "Window",
+    ["params"] = {
+        ["bounds"] = {
+            [1] = {
+                ["x"] = 0,
+                ["y"] = 0,
+                ["w"] = 500,
+                ["h"] = 600
+            }
+        },
+        ["draggable"] = true,
+        ["enabled"] = true,
+        ["hasCursor"] = false,
+        ["lockFlow"] = false,
+        ["modal"] = false,
+        ["offscreen"] = false,
+        ["resizable"] = false,
+        ["zOrder"] = 112,
+        ["text"] = "DTC Preset Browser"
+    },
+    ["skin"] = {
+        ["params"] = {
+            ["headerHeight"] = 20,
+            ["name"] = "windowSkin"
+        },
+        ["skins"] = {
+            ["header"] = {
+                ["skinData"] = {
+                    ["params"] = {
+                        ["hasCloseButton"] = false,
+                        ["insets"] = {
+                            ["bottom"] = 2,
+                            ["left"] = 2,
+                            ["right"] = 2,
+                            ["top"] = 2
+                        }
+                    },
+                    ["states"] = {
+                        ["released"] = {
+                            [1] = {
+                                ["bkg"] = {
+                                    ["center_center"] = "0x00000099"
+                                },
+                                ["text"] = {
+                                    ["color"] = "0x6faf75ff"
+                                }
+                            },
+                            [2] = {
+                                ["bkg"] = {
+                                    ["center_center"] = "0x00000099"
+                                },
+                                ["text"] = {
+                                    ["color"] = "0x6faf75ff"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        ["states"] = {
+            ["released"] = {
+                [1] = {
+                    ["bkg"] = {
+                        ["center_center"] = "0x1a1a1aee"
+                    }
+                }
+            }
+        }
+    },
+    ["children"] = {
+
+        -- Title bar background
+        ["titleBackground"] = {
+            ["type"] = "Panel",
+            ["params"] = {
+                ["zindex"] = -1,
+                ["bounds"] = {
+                    ["x"] = 0,
+                    ["y"] = 0,
+                    ["w"] = 500,
+                    ["h"] = 30
+                },
+            },
+            ["skin"] = {
+                ["states"] = {
+                    ["released"] = {
+                        [1] = {
+                            ["bkg"] = {
+                                ["center_center"] = "0x111111ff",
+                            },
+                        },
+                    },
+                },
+            }
+        },
+
+        -- Aircraft type label
+        ["lblAircraft"] = {
+            ["type"] = "Static",
+            ["params"] = {
+                ["bounds"] = {
+                    ["x"] = 10,
+                    ["y"] = 4,
+                    ["w"] = 380,
+                    ["h"] = 22
+                },
+                ["text"] = "DTC Preset Browser",
+            },
+            ["skin"] = {
+                ["states"] = {
+                    ["released"] = {
+                        [1] = {
+                            ["text"] = {
+                                ["color"] = "0x6faf75ff",
+                                ["font"] = "DejaVuLGCSansCondensed.ttf",
+                                ["fontSize"] = 13,
+                                ["horzAlign"] = {
+                                    ["type"] = "left",
+                                },
+                                ["vertAlign"] = {
+                                    ["offset"] = 0,
+                                    ["type"] = "middle",
+                                },
+                            },
+                        },
+                    },
+                },
+            }
+        },
+
+        -- Close button
+        ["btnClose"] = {
+            ["type"] = "Button",
+            ["params"] = {
+                ["bounds"] = {
+                    ["x"] = 470,
+                    ["y"] = 0,
+                    ["w"] = 30,
+                    ["h"] = 30
+                },
+                ["text"] = "X",
+            },
+            ["skin"] = {
+                ["params"] = {
+                    ["name"] = "buttonSkinAwacs"
+                }
+            },
+        },
+
+        -- Preset list (read-only EditBox — dxgui has no ListBox)
+        ["presetList"] = {
+            ["type"] = "EditBox",
+            ["params"] = {
+                ["bounds"] = {
+                    ["x"] = 0,
+                    ["y"] = 30,
+                    ["w"] = 500,
+                    ["h"] = 490
+                },
+                ["multiline"] = true,
+                ["readOnly"] = true,
+            }
+        },
+
+        -- Navigation: Previous preset
+        ["btnPrev"] = {
+            ["type"] = "Button",
+            ["params"] = {
+                ["bounds"] = {
+                    ["x"] = 0,
+                    ["y"] = 525,
+                    ["w"] = 80,
+                    ["h"] = 30
+                },
+                ["text"] = "< Prev",
+            },
+            ["skin"] = {
+                ["params"] = {
+                    ["name"] = "buttonSkinAwacs"
+                }
+            },
+        },
+
+        -- Navigation: Next preset
+        ["btnNext"] = {
+            ["type"] = "Button",
+            ["params"] = {
+                ["bounds"] = {
+                    ["x"] = 80,
+                    ["y"] = 525,
+                    ["w"] = 80,
+                    ["h"] = 30
+                },
+                ["text"] = "Next >",
+            },
+            ["skin"] = {
+                ["params"] = {
+                    ["name"] = "buttonSkinAwacs"
+                }
+            },
+        },
+
+        -- Upload selected preset
+        ["btnUpload"] = {
+            ["type"] = "Button",
+            ["params"] = {
+                ["bounds"] = {
+                    ["x"] = 270,
+                    ["y"] = 525,
+                    ["w"] = 110,
+                    ["h"] = 30
+                },
+                ["text"] = "Upload",
+            },
+            ["skin"] = {
+                ["params"] = {
+                    ["name"] = "buttonSkinAwacs"
+                }
+            },
+        },
+
+        -- Open in DTC app (shows/activates the Windows app)
+        ["btnOpenApp"] = {
+            ["type"] = "Button",
+            ["params"] = {
+                ["bounds"] = {
+                    ["x"] = 385,
+                    ["y"] = 525,
+                    ["w"] = 115,
+                    ["h"] = 30
+                },
+                ["text"] = "Open App",
+            },
+            ["skin"] = {
+                ["params"] = {
+                    ["name"] = "buttonSkinAwacs"
+                }
+            },
+        },
+
+        -- Status bar at bottom
+        ["lblStatus"] = {
+            ["type"] = "Static",
+            ["params"] = {
+                ["bounds"] = {
+                    ["x"] = 0,
+                    ["y"] = 560,
+                    ["w"] = 500,
+                    ["h"] = 20
+                },
+                ["text"] = "",
+            },
+            ["skin"] = {
+                ["states"] = {
+                    ["released"] = {
+                        [1] = {
+                            ["text"] = {
+                                ["color"] = "0x999999ff",
+                                ["font"] = "DejaVuLGCSansCondensed.ttf",
+                                ["fontSize"] = 11,
+                                ["horzAlign"] = {
+                                    ["type"] = "center",
+                                },
+                            },
+                        },
+                    },
+                },
+            }
+        },
+
+    }
+}

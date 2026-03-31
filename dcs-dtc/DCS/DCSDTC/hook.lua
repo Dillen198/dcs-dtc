@@ -20,6 +20,7 @@ local DTCCaptureF15E = DTCLoadFile('Scripts/DCSDTC/wptCaptureF15E.lua')
 local DTCCaptureAH64D = DTCLoadFile('Scripts/DCSDTC/wptCaptureAH64D.lua')
 local DTCUploadInProgressDlg = DTCLoadFile('Scripts/DCSDTC/uploadInProgress.lua')
 local DTCKneeboard = DTCLoadFile('Scripts/DCSDTC/kneeboard.lua')
+local DTCPresetPanel = DTCLoadFile('Scripts/DCSDTC/dtcPanel.lua')
 
 local DTCHook =
 {
@@ -42,6 +43,7 @@ local DTCHook =
     captureAH64DDialog = nil,
     uploadInProgressDialog = nil,
     kneeboardDialog = nil,
+    presetPanelDialog = nil,
 
     currentAircraft = null
 }
@@ -266,6 +268,14 @@ function DTCHook:receiveData()
                 self.kneeboardDialog:setInfoText(string.sub(data, string.len(kbinfoprefix)+1))
             elseif string.sub(data, 1, string.len(kbnotesprefix)) == kbnotesprefix then
                 self.kneeboardDialog:setNotesText(string.sub(data, string.len(kbnotesprefix)+1))
+            else
+                local presetListPrefix = "preset_list:"
+                if string.sub(data, 1, string.len(presetListPrefix)) == presetListPrefix then
+                    if self.presetPanelDialog ~= nil then
+                        self.presetPanelDialog:receivePresetList(
+                            string.sub(data, string.len(presetListPrefix)+1))
+                    end
+                end
             end
         end
     end
@@ -320,6 +330,40 @@ function DTCHook:sendToDTC(upload)
     self:sendData(str)
 end
 
+-- Alias used by dtcPanel.lua so it doesn't depend on the internal method name
+function DTCHook:sendDataToDTC(data)
+    self:sendData(data)
+end
+
+-- Alias used by dtcPanel.lua
+function DTCHook:getCurrentAircraftType()
+    return self:getAircraftType()
+end
+
+-- Called by dtcPanel to trigger upload in C# app
+function DTCHook:uploadSelectedPreset(panel)
+    local preset = panel.presets[panel.selectedIndex]
+    if preset and preset.name then
+        local escapedName = string.gsub(preset.name, '"', '\\"')
+        local msg = '{"select_preset":"' .. escapedName ..
+                    '","aircraft":"' .. panel.aircraftType ..
+                    '","upload":"true"}'
+        self:sendData(msg)
+        panel.dialog.lblStatus:setText("Upload requested: " .. preset.name)
+    end
+end
+
+-- Toggle show/hide of preset panel (called from hotkey and dtcPanel.lua)
+function DTCHook:showHidePresetPanel()
+    if self.presetPanelDialog == nil then return end
+    if self.presetPanelDialog.visible then
+        self.presetPanelDialog:hide()
+    else
+        if self.inMission == false then return end
+        self.presetPanelDialog:show(self)
+    end
+end
+
 function DTCHook:isApache()
     return self:getAircraftType() == "AH64D"
 end
@@ -350,6 +394,9 @@ function DTCHook:createDialogs()
 
     self.uploadInProgressDialog = DTCUploadInProgressDlg
     self.uploadInProgressDialog:init(self)
+
+    self.presetPanelDialog = DTCPresetPanel
+    self.presetPanelDialog:init(self)
 end
 
 function DTCHook:destroyDialogs()
@@ -376,6 +423,10 @@ function DTCHook:destroyDialogs()
     if self.uploadInProgressDialog then
         self.uploadInProgressDialog:destroy()
         self.uploadInProgressDialog = nil
+    end
+    if self.presetPanelDialog then
+        self.presetPanelDialog:hide()
+        self.presetPanelDialog = nil
     end
 end
 
@@ -501,6 +552,9 @@ function DTCHook:checkAircraftTypeChanged()
         if self.kneeboardDialog ~= nil then
             self:hideKneeboard()
         end
+        if self.presetPanelDialog ~= nil then
+            self.presetPanelDialog:hide()
+        end
     end
 end
 
@@ -543,6 +597,9 @@ function DTCHook:onSimulationStop()
     self.captureAH64DDialog:hide()
     self.uploadInProgressDialog:hide()
     self.kneeboardDialog:hide()
+    if self.presetPanelDialog ~= nil then
+        self.presetPanelDialog:hide()
+    end
     self.inMission = false;
 end
 

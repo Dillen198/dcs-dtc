@@ -17,6 +17,10 @@ public class CockpitInfoReceiver
         public string showDTC;
         public string hideDTC;
         public string toggleDTC;
+        // Phase C: in-game preset panel
+        public string request_presets;
+        public string select_preset;
+        public string aircraft;
     }
 
     private static UDPSocket socket = new UDPSocket();

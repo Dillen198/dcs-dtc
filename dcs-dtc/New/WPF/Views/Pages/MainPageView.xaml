@@ -1,0 +1,140 @@
+<UserControl x:Class="DTC.New.WPF.Views.Pages.MainPageView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vmPages="clr-namespace:DTC.New.WPF.ViewModels.Pages"
+             Background="{StaticResource BackgroundDarkBrush}">
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+        <StackPanel Margin="40,40,40,20">
+
+            <!-- Header -->
+            <TextBlock Text="SELECT AIRCRAFT"
+                       Style="{StaticResource DTCSectionHeaderStyle}"
+                       Margin="0,0,0,20" />
+
+            <!-- Aircraft grid — 4 columns -->
+            <UniformGrid Columns="4" HorizontalAlignment="Left">
+                <Button x:Name="btnF16" Tag="F16C" Click="Aircraft_Click"
+                        Style="{StaticResource DTCButtonStyle}"
+                        Width="160" Height="90" Margin="4"
+                        ToolTip="F-16C Viper">
+                    <StackPanel HorizontalAlignment="Center">
+                        <TextBlock Text="F-16C" FontSize="16" FontWeight="Bold"
+                                   FontFamily="{StaticResource MonoFont}"
+                                   Foreground="{StaticResource AccentGreenBrightBrush}"
+                                   HorizontalAlignment="Center" />
+                        <TextBlock Text="VIPER" FontSize="10"
+                                   Foreground="{StaticResource TextSecondaryBrush}"
+                                   HorizontalAlignment="Center" Margin="0,3,0,0" />
+                    </StackPanel>
+                </Button>
+
+                <Button x:Name="btnFA18" Tag="FA18C" Click="Aircraft_Click"
+                        Style="{StaticResource DTCButtonStyle}"
+                        Width="160" Height="90" Margin="4"
+                        ToolTip="F/A-18C Hornet">
+                    <StackPanel HorizontalAlignment="Center">
+                        <TextBlock Text="F/A-18C" FontSize="16" FontWeight="Bold"
+                                   FontFamily="{StaticResource MonoFont}"
+                                   Foreground="{StaticResource AccentGreenBrightBrush}"
+                                   HorizontalAlignment="Center" />
+                        <TextBlock Text="HORNET" FontSize="10"
+                                   Foreground="{StaticResource TextSecondaryBrush}"
+                                   HorizontalAlignment="Center" Margin="0,3,0,0" />
+                    </StackPanel>
+                </Button>
+
+                <Button x:Name="btnF15E" Tag="F15E" Click="Aircraft_Click"
+                        Style="{StaticResource DTCButtonStyle}"
+                        Width="160" Height="90" Margin="4"
+                        ToolTip="F-15E Strike Eagle">
+                    <StackPanel HorizontalAlignment="Center">
+                        <TextBlock Text="F-15E" FontSize="16" FontWeight="Bold"
+                                   FontFamily="{StaticResource MonoFont}"
+                                   Foreground="{StaticResource AccentGreenBrightBrush}"
+                                   HorizontalAlignment="Center" />
+                        <TextBlock Text="STRIKE EAGLE" FontSize="10"
+                                   Foreground="{StaticResource TextSecondaryBrush}"
+                                   HorizontalAlignment="Center" Margin="0,3,0,0" />
+                    </StackPanel>
+                </Button>
+
+                <Button x:Name="btnAH64D" Tag="AH64D" Click="Aircraft_Click"
+                        Style="{StaticResource DTCButtonStyle}"
+                        Width="160" Height="90" Margin="4"
+                        ToolTip="AH-64D Apache">
+                    <StackPanel HorizontalAlignment="Center">
+                        <TextBlock Text="AH-64D" FontSize="16" FontWeight="Bold"
+                                   FontFamily="{StaticResource MonoFont}"
+                                   Foreground="{StaticResource AccentGreenBrightBrush}"
+                                   HorizontalAlignment="Center" />
+                        <TextBlock Text="APACHE" FontSize="10"
+                                   Foreground="{StaticResource TextSecondaryBrush}"
+                                   HorizontalAlignment="Center" Margin="0,3,0,0" />
+                    </StackPanel>
+                </Button>
+
+                <Button x:Name="btnA10" Tag="A10" Click="Aircraft_Click"
+                        Style="{StaticResource DTCButtonStyle}"
+                        Width="160" Height="90" Margin="4"
+                        ToolTip="A-10C II Thunderbolt">
+                    <StackPanel HorizontalAlignment="Center">
+                        <TextBlock Text="A-10C II" FontSize="16" FontWeight="Bold"
+                                   FontFamily="{StaticResource MonoFont}"
+                                   Foreground="{StaticResource AccentGreenBrightBrush}"
+                                   HorizontalAlignment="Center" />
+                        <TextBlock Text="THUNDERBOLT II" FontSize="10"
+                                   Foreground="{StaticResource TextSecondaryBrush}"
+                                   HorizontalAlignment="Center" Margin="0,3,0,0" />
+                    </StackPanel>
+                </Button>
+
+                <Button x:Name="btnC130" Tag="C130" Click="Aircraft_Click"
+                        Style="{StaticResource DTCButtonStyle}"
+                        Width="160" Height="90" Margin="4"
+                        ToolTip="C-130J Super Hercules">
+                    <StackPanel HorizontalAlignment="Center">
+                        <TextBlock Text="C-130J" FontSize="16" FontWeight="Bold"
+                                   FontFamily="{StaticResource MonoFont}"
+                                   Foreground="{StaticResource AccentGreenBrightBrush}"
+                                   HorizontalAlignment="Center" />
+                        <TextBlock Text="HERCULES" FontSize="10"
+                                   Foreground="{StaticResource TextSecondaryBrush}"
+                                   HorizontalAlignment="Center" Margin="0,3,0,0" />
+                    </StackPanel>
+                </Button>
+
+                <Button x:Name="btnCH47F" Tag="CH47F" Click="Aircraft_Click"
+                        Style="{StaticResource DTCButtonStyle}"
+                        Width="160" Height="90" Margin="4"
+                        ToolTip="CH-47F Chinook">
+                    <StackPanel HorizontalAlignment="Center">
+                        <TextBlock Text="CH-47F" FontSize="16" FontWeight="Bold"
+                                   FontFamily="{StaticResource MonoFont}"
+                                   Foreground="{StaticResource AccentGreenBrightBrush}"
+                                   HorizontalAlignment="Center" />
+                        <TextBlock Text="CHINOOK" FontSize="10"
+                                   Foreground="{StaticResource TextSecondaryBrush}"
+                                   HorizontalAlignment="Center" Margin="0,3,0,0" />
+                    </StackPanel>
+                </Button>
+
+                <Button x:Name="btnAV8B" Tag="AV8B" Click="Aircraft_Click"
+                        Style="{StaticResource DTCButtonStyle}"
+                        Width="160" Height="90" Margin="4"
+                        ToolTip="AV-8B Harrier">
+                    <StackPanel HorizontalAlignment="Center">
+                        <TextBlock Text="AV-8B" FontSize="16" FontWeight="Bold"
+                                   FontFamily="{StaticResource MonoFont}"
+                                   Foreground="{StaticResource AccentGreenBrightBrush}"
+                                   HorizontalAlignment="Center" />
+                        <TextBlock Text="HARRIER" FontSize="10"
+                                   Foreground="{StaticResource TextSecondaryBrush}"
+                                   HorizontalAlignment="Center" Margin="0,3,0,0" />
+                    </StackPanel>
+                </Button>
+            </UniformGrid>
+
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>
