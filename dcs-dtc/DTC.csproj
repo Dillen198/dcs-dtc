@@ -6,6 +6,7 @@
 		<RootNamespace>DTC</RootNamespace>
 		<Nullable>enable</Nullable>
 		<UseWindowsForms>true</UseWindowsForms>
+		<UseWPF>true</UseWPF>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Version>9.3.1</Version>
 		<Product>DTC for DCS</Product>
@@ -21,7 +22,7 @@
 		<RepositoryUrl>$(PackageProjectUrl)</RepositoryUrl>
 		<RunAnalyzersDuringBuild>True</RunAnalyzersDuringBuild>
 		<AnalysisLevel>latest</AnalysisLevel>
-		<ForceDesignerDpiUnaware>true</ForceDesignerDpiUnaware>
+		<!-- ForceDesignerDpiUnaware removed: WPF handles DPI natively -->
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -84,6 +85,8 @@
 	<ItemGroup>
 		<PackageReference Include="CoordinateSharp" Version="2.19.1.1" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+		<PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.135" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -184,6 +187,12 @@
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
 		<None Update="DCS\Hooks\DCSDTCHook.lua">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Update="DCS\DCSDTC\dtcPanel.lua">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Update="DCS\DCSDTC\dtcPanel.dlg">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
 	</ItemGroup>

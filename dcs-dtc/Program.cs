@@ -1,18 +1,23 @@
-﻿namespace DTC;
+namespace DTC;
 
 static class Program
 {
-    /// <summary>
-    /// The main entry point for the application.
-    /// </summary>
     [STAThread]
-    static void Main()
+    static void Main(string[] args)
     {
-        Application.EnableVisualStyles();
-        Application.SetCompatibleTextRenderingDefault(false);
+        // Use --winforms flag to run the legacy WinForms UI (for debugging/comparison)
+        bool useWinForms = args.Contains("--winforms");
 
-        var form = new New.UI.Base.MainForm();
-
-        Application.Run(form);
+        if (useWinForms)
+        {
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new New.UI.Base.MainForm());
+        }
+        else
+        {
+            var app = new New.WPF.App();
+            app.Run();
+        }
     }
 }

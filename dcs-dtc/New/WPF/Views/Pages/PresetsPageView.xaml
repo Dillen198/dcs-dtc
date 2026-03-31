@@ -1,0 +1,103 @@
+<UserControl x:Class="DTC.New.WPF.Views.Pages.PresetsPageView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:DTC.New.WPF"
+             Background="{StaticResource BackgroundDarkBrush}">
+
+    <UserControl.Resources>
+        <local:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+    </UserControl.Resources>
+
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <TextBlock Grid.Row="0"
+                   Text="{Binding PageTitle}"
+                   FontSize="16" FontWeight="SemiBold"
+                   Foreground="{StaticResource TextPrimaryBrush}"
+                   FontFamily="{StaticResource UIFont}"
+                   Margin="0,0,0,12" />
+
+        <!-- Preset list -->
+        <DataGrid Grid.Row="1"
+                  Style="{StaticResource DTCDataGridStyle}"
+                  ColumnHeaderStyle="{StaticResource DTCDataGridColumnHeaderStyle}"
+                  RowStyle="{StaticResource DTCDataGridRowStyle}"
+                  CellStyle="{StaticResource DTCDataGridCellStyle}"
+                  ItemsSource="{Binding Presets}"
+                  SelectedItem="{Binding SelectedPreset, Mode=TwoWay}"
+                  MouseDoubleClick="DataGrid_DoubleClick">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="PRESET NAME" Binding="{Binding Name}" Width="*"
+                                    IsReadOnly="True" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <!-- Action buttons -->
+        <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0,10,0,0">
+            <Button Content="Add"
+                    Style="{StaticResource DTCButtonStyle}"
+                    Command="{Binding AddCommand}"
+                    Width="70" Height="28" Margin="0,0,6,0" />
+            <Button Content="Edit"
+                    Style="{StaticResource DTCPrimaryButtonStyle}"
+                    Command="{Binding EditCommand}"
+                    Width="70" Height="28" Margin="0,0,6,0" />
+            <Button Content="Rename"
+                    Style="{StaticResource DTCButtonStyle}"
+                    Command="{Binding RenameCommand}"
+                    Width="70" Height="28" Margin="0,0,6,0" />
+            <Button Content="Clone"
+                    Style="{StaticResource DTCButtonStyle}"
+                    Command="{Binding CloneCommand}"
+                    Width="70" Height="28" Margin="0,0,6,0" />
+            <Button Content="Delete"
+                    Style="{StaticResource DTCDangerButtonStyle}"
+                    Command="{Binding DeleteCommand}"
+                    Width="70" Height="28" />
+        </StackPanel>
+
+        <!-- Inline "Add/Rename" overlay -->
+        <Border x:Name="dialogOverlay"
+                Grid.Row="0" Grid.RowSpan="3"
+                Background="#BB000000"
+                Visibility="Collapsed">
+            <Border Background="{StaticResource BackgroundLightBrush}"
+                    BorderBrush="{StaticResource BorderActiveBrush}"
+                    BorderThickness="1"
+                    CornerRadius="4"
+                    Padding="20"
+                    Width="300"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center">
+                <StackPanel>
+                    <TextBlock x:Name="dialogTitle"
+                               Text="Preset Name"
+                               FontSize="13" FontWeight="SemiBold"
+                               Foreground="{StaticResource TextPrimaryBrush}"
+                               Margin="0,0,0,10" />
+                    <TextBox x:Name="dialogTextBox"
+                             Style="{StaticResource DTCTextBoxStyle}"
+                             Height="28" Margin="0,0,0,12"
+                             KeyDown="DialogTextBox_KeyDown" />
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <Button Content="Cancel"
+                                Style="{StaticResource DTCButtonStyle}"
+                                Click="DialogCancel_Click"
+                                Width="70" Height="28" Margin="0,0,8,0" />
+                        <Button Content="OK"
+                                Style="{StaticResource DTCPrimaryButtonStyle}"
+                                Click="DialogOk_Click"
+                                Width="70" Height="28" />
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+        </Border>
+
+    </Grid>
+</UserControl>

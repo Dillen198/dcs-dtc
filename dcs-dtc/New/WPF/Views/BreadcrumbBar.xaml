@@ -1,0 +1,10 @@
+<UserControl x:Class="DTC.New.WPF.Views.BreadcrumbBar"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <StackPanel x:Name="PART_Panel"
+                Orientation="Horizontal"
+                VerticalAlignment="Center"
+                Margin="12,0" />
+
+</UserControl>
